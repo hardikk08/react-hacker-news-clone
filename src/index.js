@@ -1,13 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { Provider } from 'react-redux';
+import configureStore from './store/index';
+import App from './components/App';
+import GlobalStyles from './styles/globals';
 import * as serviceWorker from './serviceWorker';
 
+const store = configureStore({});
+
+if (process.env.NODE_ENV !== 'production') {
+  console.log('Initial State ->');
+  console.log(store.getState());
+}
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <div>
+      <GlobalStyles />
+      <App />
+    </div>
+  </Provider>,
   document.getElementById('root')
 );
 
